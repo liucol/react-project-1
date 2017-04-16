@@ -19,11 +19,11 @@ class App extends Component {
     render() {
 
                 let todos = this.state.todoList.map((item,index)=>{
-                    return
+                    return(
                         <li>
                             <TodoItem todo={item} />
                         </li>
-
+                    )
             })
 
         return (
@@ -39,3 +39,4 @@ class App extends Component {
             )
 }
 }
+export default App;
