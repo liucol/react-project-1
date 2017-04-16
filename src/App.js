@@ -15,8 +15,8 @@ class App extends Component {
         }
       }
     render() {
-
-                let todos = this.state.todoList.map((item,index)=>{
+                     //过滤掉用户删除的todoList,map循环每个数组，得到有用户输入数据的todo
+                let todos = this.state.todoList.filter((item)=> !item.deleted).map((item,index)=>{
                     return(
                         <li key={index}>
                             <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.delete.bind(this)}/>
@@ -61,7 +61,7 @@ class App extends Component {
                     todoList: this.state.todoList
                 })
             }
-            //调用delet()函数，直接删除传入的this
+            //用户点击删除，立即把deleted的状态设为true,并且更新todoList
             delete(event, todo){
                 //把deleted的状态设为true
                 todo.deleted = true
