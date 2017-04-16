@@ -28,7 +28,7 @@ class App extends Component {
             <div className="App">
                 <h1>我的待办</h1>
                 <div className="inputWrapper">
-                      <TodoInput content={this.state.newTodo} onSubmit={this.addTodo.bind(this)}/>
+                      <TodoInput content={this.state.newTodo} onChange={this.changeTitle.bind(this)} onSubmit={this.addTodo.bind(this)}/>
                 </div>
                 <ol>
                   {todos}
@@ -36,21 +36,28 @@ class App extends Component {
             </div>
             )
 }
-    addTodo(event){
-        this.state.todoList.push({
-            id: idMaker(),
-            //获取input的输入值
-            title: event.target.value,
-            status: null,
-            deleted: false
-        })
-        //操作state更新渲染
+    changeTitle(event) {
+      //把newTodo事先设置的空赋给input，是input清空，需要使用setState来更新渲染
         this.setState({
-            newTodo: '',
+            newTodo: event.target.value,
             todoList: this.state.todoList
         })
     }
-}
+            addTodo(event){
+                this.state.todoList.push({
+                    id: idMaker(),
+                    //获取input的输入值
+                    title: event.target.value,
+                    status: null,
+                    deleted: false
+                })
+                //操作state更新渲染
+                this.setState({
+                    newTodo: '',
+                    todoList: this.state.todoList
+                })
+            }
+    }
 export default App;
 
 let id = 0
