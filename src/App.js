@@ -19,7 +19,7 @@ class App extends Component {
                 let todos = this.state.todoList.map((item,index)=>{
                     return(
                         <li key={index}>
-                            <TodoItem todo={item} onToggle={this.toggle.bind(this)}/>
+                            <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.delete.bind(this)}/>
                         </li>
                     )
             })
@@ -61,7 +61,15 @@ class App extends Component {
                     todoList: this.state.todoList
                 })
             }
-    }
+            //调用delet()函数，直接删除传入的this
+            delete(event, todo){
+                //把deleted的状态设为true
+                todo.deleted = true
+                //更新渲染节点
+                this.setState(this.state)
+            }
+}
+
 export default App;
 
 let id = 0
