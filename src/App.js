@@ -4,14 +4,14 @@ import './reset.css'
 import './App.css';
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
+import  * as localStore from './localStore'
 
 class App extends Component {
   constructor(props){
         super(props)
         this.state = {
               newTodo: ' ',
-              todoList: [
-              ]
+              todoList:localStore.load('todoList')||[]
         }
       }
     render() {
@@ -39,6 +39,7 @@ class App extends Component {
     toggle(e, todo){
         todo.status = todo.status === 'completed' ? '' : 'completed'
         this.setState(this.state)
+        localStore.save('todoList', this.state.todoList)
     }
     changeTitle(event) {
       //把newTodo事先设置的空赋给input，是input清空，需要使用setState来更新渲染
@@ -46,6 +47,7 @@ class App extends Component {
             newTodo: event.target.value,
             todoList: this.state.todoList
         })
+        localStore.save('todoList', this.state.todoList)
     }
             addTodo(event){
                 this.state.todoList.push({
@@ -60,6 +62,7 @@ class App extends Component {
                     newTodo: '',
                     todoList: this.state.todoList
                 })
+                localStore.save('todoList', this.state.todoList)
             }
             //用户点击删除，立即把deleted的状态设为true,并且更新todoList
             delete(event, todo){
@@ -67,6 +70,7 @@ class App extends Component {
                 todo.deleted = true
                 //更新渲染节点
                 this.setState(this.state)
+                localStore.save('todoList', this.state.todoList)
             }
 }
 
