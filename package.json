@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://liucol.github.io/react-project-3/build",
   "dependencies": {
+    "leancloud-storage": "^2.1.4",
     "normalize.css": "^6.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
