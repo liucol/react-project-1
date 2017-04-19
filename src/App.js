@@ -36,10 +36,12 @@ class App extends Component {
             </div>
             )
 }
+    componentDidUpdate(){
+          localStore.save('todoList',this.state.todoList)
+    }
     toggle(e, todo){
         todo.status = todo.status === 'completed' ? '' : 'completed'
         this.setState(this.state)
-        localStore.save('todoList', this.state.todoList)
     }
     changeTitle(event) {
       //把newTodo事先设置的空赋给input，是input清空，需要使用setState来更新渲染
@@ -47,7 +49,6 @@ class App extends Component {
             newTodo: event.target.value,
             todoList: this.state.todoList
         })
-        localStore.save('todoList', this.state.todoList)
     }
             addTodo(event){
                 this.state.todoList.push({
@@ -62,7 +63,6 @@ class App extends Component {
                     newTodo: '',
                     todoList: this.state.todoList
                 })
-                localStore.save('todoList', this.state.todoList)
             }
             //用户点击删除，立即把deleted的状态设为true,并且更新todoList
             delete(event, todo){
@@ -70,7 +70,6 @@ class App extends Component {
                 todo.deleted = true
                 //更新渲染节点
                 this.setState(this.state)
-                localStore.save('todoList', this.state.todoList)
             }
 }
 
