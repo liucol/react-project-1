@@ -4,7 +4,7 @@ import './reset.css'
 import './App.css';
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
-import  * as localStore from './localStore'
+import * as localStore from './localStore'
 import AV from 'leancloud-storage'
 
 var APP_ID = 'ttfT4FPkoQ5uSAOWVBy6BT9z-gzGzoHsz';
@@ -12,7 +12,15 @@ var APP_KEY = 'RR4cpVY1AiF5y2yXKGGbdOKd';
 AV.init({
     appId: APP_ID,
     appKey: APP_KEY,
-});
+})
+
+var TestObject = AV.Object.extend('TestObject');
+var testObject = new TestObject();
+testObject.save({
+    words: {'name':'yangliu','password':'123456'}
+}).then(function(object) {
+    alert('LeanCloud Rocks!');
+})
 
 class App extends Component {
   constructor(props){
@@ -45,7 +53,7 @@ class App extends Component {
             )
 }
     componentDidUpdate(){
-          localStore.save('todoList',this.state.todoList)
+        localStore.save('todoList', this.state.todoList)
     }
     toggle(e, todo){
         todo.status = todo.status === 'completed' ? '' : 'completed'
